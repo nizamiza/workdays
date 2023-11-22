@@ -1,30 +1,30 @@
-# Work Days
+# Workdays
 
 ## Overview
 
-The `work_days` module is a Deno module designed to calculate workdays within a specified date range, excluding public holidays. It utilizes the [dayjs](https://day.js.org/) library for date manipulation and [node-ical](https://www.npmjs.com/package/node-ical) for parsing iCalendar files containing public holiday information.
+`workdays` - is a Deno module designed to calculate workdays within a specified date range, excluding public holidays. It utilizes [dayjs](https://day.js.org/) library for date manipulation and [node-ical](https://www.npmjs.com/package/node-ical) for parsing iCalendar files containing public holiday information.
 
 ## Usage
 
 Import it into your project via URL:
 ```typescript
-import { getWorkDaysForDateRange } from "https://deno.land/x/work_days/mod.ts"
+import { getWorkdaysForDateRange } from "https://deno.land/x/workdays/mod.ts"
 ```
 
 ### Example
 
 ```typescript
-import { getWorkDaysForDateRange } from "work_days";
+import { getWorkdaysForDateRange } from "https://deno.land/x/workdays/mod.ts";
 
 const SLOVAK_PUBLIC_HOLIDAY_ICAL_URL =
   "https://calendar.google.com/calendar/ical/en.slovak%23holiday%40group.v.calendar.google.com/public/basic.ics";
 
-const workDays = await getWorkDaysForDateRange({
+const workdays = await getWorkdaysForDateRange({
   holidaysIcalUrl: SLOVAK_PUBLIC_HOLIDAY_ICAL_URL,
   startDate: new Date("2023-11-01"),
 });
 
-console.log(workDays);
+console.log(workdays);
 ```
 
 ## API
@@ -40,7 +40,7 @@ console.log(workDays);
 
 A numeric representation of a week day (0 to 6, where 0 is Sunday and 6 is Saturday).
 
-#### `GetWorkDaysForDateRangeParameters`
+#### `GetWorkdaysForDateRangeParameters`
 
 - `holidaysIcalUrl: string`: URL of the public holidays iCalendar file.
 - `startDate: DateArg`: Starting date for the period (inclusive).
@@ -53,9 +53,9 @@ A numeric representation of a week day (0 to 6, where 0 is Sunday and 6 is Satur
 
 Checks whether the given date is a business (work) day.
 
-#### `getWorkDaysForDateRange(params: GetWorkDaysForDateRangeParameters): Promise<Date[]>`
+#### `getWorkdaysForDateRange(params: GetWorkdaysForDateRangeParameters): Promise<Date[]>`
 
-Retrieves a list of work days for the specified parameters, excluding public holidays.
+Retrieves a list of workdays for the specified parameters, excluding public holidays.
 
 #### `fetchPublicHolidays(url: string): Promise<PublicHoliday[]>`
 

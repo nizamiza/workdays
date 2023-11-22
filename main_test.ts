@@ -1,5 +1,5 @@
 import { assertEquals } from "assert";
-import { getWorkDaysForDateRange } from "./main.ts";
+import { getWorkdaysForDateRange } from "./main.ts";
 
 const SLOVAK_PUBLIC_HOLIDAY_ICAL_URL =
   "https://calendar.google.com/calendar/ical/en.slovak%23holiday%40group.v.calendar.google.com/public/basic.ics";
@@ -7,12 +7,12 @@ const SLOVAK_PUBLIC_HOLIDAY_ICAL_URL =
 Deno.test({
   name: "basic ical test",
   async fn() {
-    const workDays = await getWorkDaysForDateRange({
+    const workdays = await getWorkdaysForDateRange({
       holidaysIcalUrl: SLOVAK_PUBLIC_HOLIDAY_ICAL_URL,
       startDate: new Date("2023-11-01"),
     });
 
-    const expectedWorkDays = [
+    const expectedWorkdays = [
       "02",
       "03",
       "06",
@@ -35,6 +35,6 @@ Deno.test({
       "30",
     ].map((date) => new Date(`2023-11-${date}`));
 
-    assertEquals(workDays, expectedWorkDays);
+    assertEquals(workdays, expectedWorkdays);
   },
 });

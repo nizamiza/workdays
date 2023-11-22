@@ -10,9 +10,9 @@ export type DateArg = Parameters<typeof dayjs>[0];
 
 export type WeekDay = 0 | 1 | 2 | 3 | 4 | 5 | 6;
 
-export type GetWorkDaysForDateRangeParameters = {
+export type GetWorkdaysForDateRangeParameters = {
   /**
-   * URL of Public holidays ICalendar. E.g. Slovak public holidays calendar:
+   * URL of Public holidays iCalendar. E.g. Slovak public holidays calendar:
    * ```plain
    * https://calendar.google.com/calendar/ical/en.slovak%23holiday%40group.v.calendar.google.com/public/basic.ics
    * ```
@@ -47,14 +47,14 @@ export function isBusinessDay(businessDays: WeekDay[], value: DateArg) {
 }
 
 /**
- * Retrieves list of work days for the specified parameters.
+ * Retrieves list of workdays for the specified parameters.
  */
-export async function getWorkDaysForDateRange({
+export async function getWorkdaysForDateRange({
   holidaysIcalUrl,
   startDate,
   endDate = dayjs(startDate).endOf("month"),
   businessDays = DEFAULT_BUSINESS_DAYS,
-}: GetWorkDaysForDateRangeParameters): Promise<Date[]> {
+}: GetWorkdaysForDateRangeParameters): Promise<Date[]> {
   const holidays = await fetchPublicHolidays(holidaysIcalUrl);
 
   const isHoliday = (value: DateArg) => {
@@ -66,11 +66,11 @@ export async function getWorkDaysForDateRange({
   let currentDay = dayjs(startDate);
   const end = dayjs(endDate);
 
-  const workDays: Date[] = [];
+  const workdays: Date[] = [];
 
   while (true) {
     if (!isHoliday(currentDay) && isBusinessDay(businessDays, currentDay)) {
-      workDays.push(currentDay.clone().toDate());
+      workdays.push(currentDay.clone().toDate());
     }
 
     currentDay = currentDay.add(1, "day");
@@ -80,11 +80,11 @@ export async function getWorkDaysForDateRange({
     }
   }
 
-  return workDays;
+  return workdays;
 }
 
 /**
- * Fetches list of public holidays for the given ICalendar URL.
+ * Fetches list of public holidays for the given iCalendar URL.
  */
 export function fetchPublicHolidays(url: string): Promise<PublicHoliday[]> {
   return new Promise((resolve, reject) => {
